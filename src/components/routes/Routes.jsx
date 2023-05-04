@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../layout/Main';
 import Blog from "../pages/Blog/Blog";
+import ChefDetails from "../pages/Home/Chefs/ChefDetails/ChefDetails";
 import Chefs from "../pages/Home/Chefs/Chefs";
 import Home from '../pages/Home/Home/Home';
 import Login from '../pages/Login/Login/Login';
@@ -36,6 +37,18 @@ const router = createBrowserRouter([
                         <Chefs></Chefs>
                     </PrivateRoute>
                 ),
+            },
+            {
+                path: "/chef/:id",
+                element: (
+                    <PrivateRoute>
+                        <ChefDetails></ChefDetails>
+                    </PrivateRoute>
+                ),
+                loader: ({ params }) =>
+                    fetch(
+                        `https://yummy-tummy-cook-book-server.vercel.app/chef/${params.id}`
+                    ),
             },
             {
                 path: "/register",

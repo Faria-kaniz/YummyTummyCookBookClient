@@ -11,11 +11,12 @@ const Chefs = () => {
             .catch((error) => console.error(error));
     }, []);
     return (
-        <div>
-            {chefList.map(chef => <SingleChef
-            key={chef.id}
-            chef={chef}
-            ></SingleChef>)}
+        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            <div className="grid gap-8  mb-8 md:grid-cols-2 lg:grid-cols-3">
+                {chefList.map((chef) => (
+                    <SingleChef key={chef.id} chef={chef}></SingleChef>
+                ))}
+            </div>
         </div>
     );
 };
