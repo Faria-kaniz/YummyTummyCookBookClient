@@ -1,8 +1,40 @@
-import React from 'react';
+import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import {
+    addToFavourite,
+    getFavouriteList,
+} from "../../../../../utility/fakedb";
 
 const ChefDetails = () => {
     const chefData = useLoaderData();
+    let [heartIcon, setheartIcon] = useState(farHeart);
+    let [favList, setFavList] = useState([]);
+
+    const setLocalBookmark = (id) => {
+        if (!favList.includes(id)) {
+            if (heartIcon == farHeart && favList.includes(id)) {
+                setheartIcon(fasHeart);
+            } else {
+                setheartIcon(farHeart);
+            }
+            setFavourite(id);
+        }
+    };
+
+    const setFavourite = (id) => {
+        addToFavourite(id);
+    };
+
+    useEffect(() => {
+        const fav = getFavouriteList();
+        const favArr = JSON.parse(fav);
+        if (favArr.length > 0) {
+        setFavList(favArr);
+        }
+    }, []);
     return (
         <div className="hero min-h-screen min-w-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
@@ -41,14 +73,17 @@ const ChefDetails = () => {
                                 {/* row 1 */}
                                 {chefData.recipes.map((recipe, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <th>{index + 1}</th>
                                             <td>{recipe.recipe_name}</td>
                                             <td>
                                                 {recipe.ingredients.map(
-                                                    (ele) => {
+                                                    (ele,eleIndex) => {
                                                         return (
-                                                            <span className="mr-2">
+                                                            <span
+                                                                className="mr-2"
+                                                                key={eleIndex}
+                                                            >
                                                                 <div className="badge badge-outline">
                                                                     {ele}
                                                                 </div>
@@ -59,7 +94,22 @@ const ChefDetails = () => {
                                             </td>
                                             <td>{recipe.cooking_method}</td>
                                             <td>{recipe.rating}</td>
-                                            <td>{recipe.rating}</td>
+                                            <td>
+                                                <FontAwesomeIcon
+                                                    onClick={() =>
+                                                        setLocalBookmark(
+                                                            recipe.recipe_id
+                                                        )
+                                                    }
+                                                    icon={
+                                                        favList.includes(
+                                                            recipe.recipe_id
+                                                        )
+                                                            ? fasHeart
+                                                            : heartIcon
+                                                    }
+                                                />
+                                            </td>
                                         </tr>
                                     );
                                 })}
