@@ -6,7 +6,7 @@ const ClientReview = () => {
     const [clientReview, setClientReview] = useState([]);
 
     useEffect(() => {
-        fetch("../../../../../public/data/clientReview.json")
+        fetch("/data/clientReview.json")
             .then((res) => res.json())
             .then((data) => setClientReview(data))
             .catch((error) => console.error(error));
