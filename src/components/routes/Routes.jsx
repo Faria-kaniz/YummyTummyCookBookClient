@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from '../layout/Main';
+import ErrorPage from "../ErrorPage/ErrorPage";
+import Main from "../layout/Main";
 import Blog from "../pages/Blog/Blog";
 import ChefDetails from "../pages/Home/Chefs/ChefDetails/ChefDetails";
 import Chefs from "../pages/Home/Chefs/Chefs";
-import Home from '../pages/Home/Home/Home';
-import Login from '../pages/Login/Login/Login';
+import Home from "../pages/Home/Home/Home";
+import Login from "../pages/Login/Login/Login";
 import Register from "../pages/Login/Register/Register";
 import About from "../pages/Shared/About/About";
 import PrivateRoute from "./PrivateRoute";
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
