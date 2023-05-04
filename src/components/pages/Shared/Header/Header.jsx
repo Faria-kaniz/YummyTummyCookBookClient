@@ -112,18 +112,18 @@ const Header = () => {
                     </>
                 ) : (
                     <>
-                        <ActiveLink
+                        <Link
                             className="btn btn-outline btn-accent mr-4"
                             to="/register"
                         >
                             Sign Up
-                        </ActiveLink>
-                        <ActiveLink
+                        </Link>
+                        <Link
                             className="btn btn-outline btn-accent"
                             to="/login"
                         >
                             Login
-                        </ActiveLink>
+                        </Link>
                     </>
                 )}
             </div>
