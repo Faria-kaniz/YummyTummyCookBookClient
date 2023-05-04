@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
+import ActiveLink from "../../../routes/ActiveLink/ActiveLink";
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -66,38 +67,38 @@ const Header = () => {
             <div className="navbar-center hidden lg:flex text-[#ddd]">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <Link
+                        <ActiveLink
                             className="btn btn-ghost normal-case text-xl"
                             to="/"
                         >
                             Home
-                        </Link>
+                        </ActiveLink>
                     </li>
                     {user && (
                         <li>
-                            <Link
+                            <ActiveLink
                                 className="btn btn-ghost normal-case text-xl"
                                 to="/chefs"
                             >
                                 Chef
-                            </Link>
+                            </ActiveLink>
                         </li>
-                    ) }
+                    )}
                     <li>
-                        <Link
+                        <ActiveLink
                             className="btn btn-ghost normal-case text-xl"
                             to="/blog"
                         >
                             Blog
-                        </Link>
+                        </ActiveLink>
                     </li>
                     <li>
-                        <Link
+                        <ActiveLink
                             className="btn btn-ghost normal-case text-xl"
                             to="/about"
                         >
                             About us
-                        </Link>
+                        </ActiveLink>
                     </li>
                 </ul>
             </div>
@@ -111,18 +112,18 @@ const Header = () => {
                     </>
                 ) : (
                     <>
-                        <Link
+                        <ActiveLink
                             className="btn btn-outline btn-accent mr-4"
                             to="/register"
                         >
                             Sign Up
-                        </Link>
-                        <Link
+                        </ActiveLink>
+                        <ActiveLink
                             className="btn btn-outline btn-accent"
                             to="/login"
                         >
                             Login
-                        </Link>
+                        </ActiveLink>
                     </>
                 )}
             </div>
