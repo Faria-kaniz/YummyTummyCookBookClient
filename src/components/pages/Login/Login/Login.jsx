@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
 
 const Login = () => {
+    let navigate = useNavigate();
     const { signIn, googleSignIn, githubSignIn } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,8 +17,10 @@ const Login = () => {
             signIn(email, password)
                 .then((result) => {
                     const loggedUser = result.user;
+                    navigate("/");
                 })
                 .catch((error) => {
+                    navigate("/login");
                     console.log(error.message);
                 });
         }
@@ -27,10 +30,10 @@ const Login = () => {
         googleSignIn()
             .then((result) => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
-                // setUser(loggedinUser);
+                navigate("/");
             })
             .catch((error) => {
+                navigate("/login");
                 console.log("error", error.message);
             });
     };
@@ -39,10 +42,10 @@ const Login = () => {
         githubSignIn()
             .then((result) => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
-                // setUser(loggedinUser);
+                navigate("/");
             })
             .catch((error) => {
+                navigate("/login");
                 console.log("error", error.message);
             });
     };
