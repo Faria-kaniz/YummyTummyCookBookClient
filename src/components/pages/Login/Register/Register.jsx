@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProviders';
 
 const Register = () => {
 const { user, createUser } = useContext(AuthContext);
+const [error, setError] = useState([]);
+let navigate = useNavigate();
+
 // console.log(user);
 const handleRegister = (event) => {
     event.preventDefault();
@@ -18,9 +21,13 @@ const handleRegister = (event) => {
         .then((result) => {
             const registerUser = result.user;
             form.reset();
+            navigate("/login");
         })
         .catch((error) => {
-            console.log(error.message);
+            let fireBaseErr = [];
+            fireBaseErr.push(error.message);
+            setError(fireBaseErr);
+            return;
         });
 };
 
@@ -31,6 +38,13 @@ const handleRegister = (event) => {
                     <h1 className="text-5xl font-bold">Please Register !</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <div className='mx-8 mt-4'>
+                        <ul>
+                            {error.map((err) => {
+                                return <li className="text-red-500">{err}</li>;
+                            })}
+                        </ul>
+                    </div>
                     <form onSubmit={handleRegister} className="card-body">
                         <div className="form-control">
                             <label className="label">
@@ -53,7 +67,7 @@ const handleRegister = (event) => {
                                 placeholder="email"
                                 name="email"
                                 className="input input-bordered"
-                                required
+                                
                             />
                         </div>
                         <div className="form-control">
