@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProviders';
+import { AuthContext } from '../../../providers/AuthProviders';
 
 const Register = () => {
 const { user, createUser } = useContext(AuthContext);

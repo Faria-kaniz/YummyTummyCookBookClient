@@ -1,23 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProviders";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 const Login = () => {
     const { signIn, googleSignIn, githubSignIn } = useContext(AuthContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const handleLogin = (event) => {
         event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
+        // const form = event.target;
+        // const email = form.email.value;
+        // const password = form.password.value;
         console.log(email, password);
-
-        signIn(email, password)
-            .then((result) => {
-                const loggedUser = result.user;
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+        if ((email, password)) {
+            signIn(email, password)
+                .then((result) => {
+                    const loggedUser = result.user;
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        }
     };
 
     const handleGoogleLogin = () => {
@@ -56,6 +59,7 @@ const Login = () => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 placeholder="email"
                                 name="email"
@@ -68,6 +72,7 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
+                                onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 placeholder="password"
                                 name="password"

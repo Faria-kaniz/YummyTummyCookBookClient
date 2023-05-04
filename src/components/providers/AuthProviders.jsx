@@ -19,12 +19,12 @@ const auth = getAuth(app);
 
 const AuthProviders = ({ children }) => {
     const [user, setUser] = useState(null);
-/**
- * 
- * @param {*} email 
- * @param {*} password 
- * @returns Register for EmailAndPassword
- */
+    /**
+     *
+     * @param {*} email
+     * @param {*} password
+     * @returns Register for EmailAndPassword
+     */
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
     };
@@ -38,17 +38,23 @@ const AuthProviders = ({ children }) => {
     };
 
     /**
-     * SignInWith Google 
+     * SignInWith Google
      */
 
-    const googleSignIn = () =>{
+    const googleSignIn = () => {
         return signInWithPopup(auth, googleProvider);
-    }
+    };
 
-    
+    /***
+     * SignInWith GitHub
+     */
     const githubSignIn = () => {
         return signInWithPopup(auth, githubProvider);
-    }
+    };
+
+    /**
+     * observer set
+     */
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -68,8 +74,7 @@ const AuthProviders = ({ children }) => {
         googleSignIn,
         githubSignIn,
     };
-
-    // const user = { displayName : ' Faria Rabbee ' }
+    
     return (
         <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
     );
