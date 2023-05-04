@@ -10,7 +10,6 @@ const PrivateRoute = ({children}) => {
     if(loading){
         return (
             <ClipLoader
-                color={color}
                 loading={loading}
                 size={150}
                 aria-label="Loading Spinner"

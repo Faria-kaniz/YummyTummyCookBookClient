@@ -51,11 +51,11 @@ const Header = () => {
                         </li>
                         <li>
                             <Link
-                            className="btn btn-ghost normal-case text-xl"
-                            to="/about"
-                        >
-                            About us
-                        </Link>
+                                className="btn btn-ghost normal-case text-xl"
+                                to="/about"
+                            >
+                                About us
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -73,14 +73,16 @@ const Header = () => {
                             Home
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            className="btn btn-ghost normal-case text-xl"
-                            to="/chefs"
-                        >
-                            Chef
-                        </Link>
-                    </li>
+                    {user && (
+                        <li>
+                            <Link
+                                className="btn btn-ghost normal-case text-xl"
+                                to="/chefs"
+                            >
+                                Chef
+                            </Link>
+                        </li>
+                    ) }
                     <li>
                         <Link
                             className="btn btn-ghost normal-case text-xl"
@@ -100,16 +102,6 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end cols">
-                <Link
-                    className="btn btn-outline btn-accent mr-4"
-                    to="/register"
-                >
-                    Sign Up
-                </Link>
-                <Link className="btn btn-outline btn-accent" to="/login">
-                    Login
-                </Link>
-
                 {user ? (
                     <>
                         (<span style={{ color: "#ddd" }}>{user.email}</span>)
@@ -118,7 +110,20 @@ const Header = () => {
                         </button>
                     </>
                 ) : (
-                    <Link to="/login">Login</Link>
+                    <>
+                        <Link
+                            className="btn btn-outline btn-accent mr-4"
+                            to="/register"
+                        >
+                            Sign Up
+                        </Link>
+                        <Link
+                            className="btn btn-outline btn-accent"
+                            to="/login"
+                        >
+                            Login
+                        </Link>
+                    </>
                 )}
             </div>
         </div>
