@@ -1,6 +1,7 @@
 .active {
-    color: #e0e0dd !important;
     font-size: 17px;
     font-weight: bold;
-    background-color: beige;
+    border-bottom: 2px solid #ddd;
+    background-color: transparent !important;
+    border-radius: 0px;
 }
