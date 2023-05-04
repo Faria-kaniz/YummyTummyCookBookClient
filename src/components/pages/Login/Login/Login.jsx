@@ -7,6 +7,7 @@ const Login = () => {
     const { signIn, googleSignIn, githubSignIn } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState([]);
     const handleLogin = (event) => {
         event.preventDefault();
         // const form = event.target;
@@ -21,7 +22,10 @@ const Login = () => {
                 })
                 .catch((error) => {
                     navigate("/login");
-                    console.log(error.message);
+                    let fireBaseErr = [];
+                    fireBaseErr.push(error.message);
+                    setError(fireBaseErr);
+                    return;
                 });
         }
     };
@@ -34,7 +38,10 @@ const Login = () => {
             })
             .catch((error) => {
                 navigate("/login");
-                console.log("error", error.message);
+                let fireBaseErr = [];
+                fireBaseErr.push(error.message);
+                setError(fireBaseErr);
+                return;
             });
     };
 
@@ -46,7 +53,10 @@ const Login = () => {
             })
             .catch((error) => {
                 navigate("/login");
-                console.log("error", error.message);
+                let fireBaseErr = [];
+                fireBaseErr.push(error.message);
+                setError(fireBaseErr);
+                return;
             });
     };
     return (
@@ -56,6 +66,17 @@ const Login = () => {
                     <h1 className="text-5xl font-bold">Please Login !</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <div className="mx-8 mt-4">
+                        <ul>
+                            {error.map((err, index) => {
+                                return (
+                                    <li key={index} className="text-red-500">
+                                        {err}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                     <form className="card-body">
                         <div className="form-control">
                             <label className="label">

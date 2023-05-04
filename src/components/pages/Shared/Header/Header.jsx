@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
 import ActiveLink from "../../../routes/ActiveLink/ActiveLink";
+import './Header.css';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -14,11 +15,13 @@ const Header = () => {
         <div className="navbar bg-base-content">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                    <label
+                        tabIndex={0}
+                        className="btn btn-outline lg:hidden responsiveDropdn"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
-                            fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
@@ -26,6 +29,7 @@ const Header = () => {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
+                                fill="red"
                                 d="M4 6h16M4 12h8m-8 6h16"
                             />
                         </svg>
@@ -40,6 +44,14 @@ const Header = () => {
                                 to="/"
                             >
                                 Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className="btn btn-ghost normal-case text-xl"
+                                to="/chefs"
+                            >
+                                Chef
                             </Link>
                         </li>
                         <li>
@@ -60,7 +72,10 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
-                <a className="btn text-[#ddd] normal-case md:text-xl">
+                <a className="text-[#ddd] normal-case md:text-xl lg:hidden">
+                    YTCB
+                </a>
+                <a className="text-[#ddd] normal-case md:text-xl hidden lg:block">
                     Yummy Tummy Cook Book
                 </a>
             </div>

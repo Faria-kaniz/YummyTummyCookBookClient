@@ -38,10 +38,14 @@ const handleRegister = (event) => {
                     <h1 className="text-5xl font-bold">Please Register !</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className='mx-8 mt-4'>
+                    <div className="mx-8 mt-4">
                         <ul>
-                            {error.map((err) => {
-                                return <li className="text-red-500">{err}</li>;
+                            {error.map((err, index) => {
+                                return (
+                                    <li key={index} className="text-red-500">
+                                        {err}
+                                    </li>
+                                );
                             })}
                         </ul>
                     </div>
@@ -67,7 +71,7 @@ const handleRegister = (event) => {
                                 placeholder="email"
                                 name="email"
                                 className="input input-bordered"
-                                
+                                required
                             />
                         </div>
                         <div className="form-control">
