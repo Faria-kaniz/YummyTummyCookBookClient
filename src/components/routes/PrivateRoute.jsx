@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
         return (
             <ClipLoader
                 loading={loading}
-                size={150}
+                size={100}
                 aria-label="Loading Spinner"
                 data-testid="loader"
             />

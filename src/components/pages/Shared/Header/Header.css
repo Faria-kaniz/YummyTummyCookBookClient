@@ -2,3 +2,6 @@
     color: rgb(224, 224, 221) !important;
     margin-right: 5px;
 }
+.profileImg {
+    cursor: pointer;
+}

@@ -1,35 +1,47 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../providers/AuthProviders';
+import { getAuth, updateProfile } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import app from "../../../firebase/firebase.config";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 const Register = () => {
-const { user, createUser } = useContext(AuthContext);
-const [error, setError] = useState([]);
-let navigate = useNavigate();
+    const auth = getAuth(app);
+    const { user, createUser, setLoading } = useContext(AuthContext);
+    const [error, setError] = useState([]);
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [photo, setPhoto] = useState("");
+    const [password, setPassword] = useState("");
+    let navigate = useNavigate();
 
-// console.log(user);
-const handleRegister = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const photo_url = form.photo_url.value;
-    console.log(name, email, password, photo_url);
+    const handleRegister = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photo_url = form.photo_url.value;
+        console.log(name,photo_url);
 
-    createUser(email, password)
-        .then((result) => {
-            const registerUser = result.user;
-            form.reset();
-            navigate("/login");
-        })
-        .catch((error) => {
-            let fireBaseErr = [];
-            fireBaseErr.push(error.message);
-            setError(fireBaseErr);
-            return;
-        });
-};
+        createUser(email, password)
+            .then((result) => {
+                const registerUser = result.user;
+                if (registerUser) {
+                    updateProfile(auth.currentUser, {
+                        displayName: name,
+                        photoURL: photo_url,
+                    }).then(() => {
+                        setLoading(true);
+                        form.reset();
+                        navigate("/");
+                    });
+                }
+            })
+            .catch((error) => {
+                let fireBaseErr = [];
+                fireBaseErr.push(error.message);
+                setError(fireBaseErr);
+                return;
+            });
+    };
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -55,6 +67,7 @@ const handleRegister = (event) => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input
+                                onChange={(e) => setName(e.target.value)}
                                 type="text"
                                 placeholder="name"
                                 name="name"
@@ -67,6 +80,7 @@ const handleRegister = (event) => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 placeholder="email"
                                 name="email"
@@ -79,6 +93,7 @@ const handleRegister = (event) => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
+                                onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 placeholder="password"
                                 name="password"
@@ -91,6 +106,7 @@ const handleRegister = (event) => {
                                 <span className="label-text">Photo URL</span>
                             </label>
                             <input
+                                onChange={(e) => setPhoto(e.target.value)}
                                 type="text"
                                 placeholder="photo url"
                                 name="photo_url"

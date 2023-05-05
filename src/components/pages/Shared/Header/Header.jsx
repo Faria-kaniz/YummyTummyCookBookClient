@@ -120,8 +120,21 @@ const Header = () => {
             <div className="navbar-end cols">
                 {user ? (
                     <>
-                        (<span style={{ color: "#ddd" }}>{user.email}</span>)
-                        <button onClick={handleLogOut} className="btn btn-xs">
+                        (
+                        <div className="avatar">
+                            <div className="w-10 rounded-full profileImg mr-4">
+                                <img
+                                    src={user.photoURL}
+                                    title={user.displayName}
+                                />
+                            </div>
+                        </div>
+                        )
+                        <button
+                            style={{ color: "#ddd" }}
+                            onClick={handleLogOut}
+                            className="btn btn-outline btn-accent mr-4"
+                        >
                             Sign out
                         </button>
                     </>

@@ -4,7 +4,7 @@ import './About.css';
 const About = () => {
     return (
         <>
-            <div className="bg-gray-100 p-6 rounded shadow-lg">
+            <div className="bg-gray-100 p-6 rounded shadow-lg mt-8">
                 <div className="avatar">
                     <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <img src="https://i.ibb.co/GchQLRv/male1.jpg" />

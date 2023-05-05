@@ -26,8 +26,10 @@ const addToFavourite = (id) => {
             "favourite-list",
             JSON.stringify(storedFavouriteListArr)
         );
+        location.reload();
         toast.success("Favourite!!!", { autoClose: 1000 });
     }
 };
 
 export { getFavouriteList, addToFavourite };
+

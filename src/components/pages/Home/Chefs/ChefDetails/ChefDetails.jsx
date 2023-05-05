@@ -1,14 +1,15 @@
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import {
     addToFavourite,
     getFavouriteList,
 } from "../../../../../utility/fakedb";
 
 const ChefDetails = () => {
+    const [loading, setLoading] = useState(true);
     const chefData = useLoaderData();
     let [heartIcon, setheartIcon] = useState(farHeart);
     let [favList, setFavList] = useState([]);
@@ -17,6 +18,7 @@ const ChefDetails = () => {
         if (!favList.includes(id)) {
             if (heartIcon == farHeart && favList.includes(id)) {
                 setheartIcon(fasHeart);
+                setLoading(true);
             } else {
                 setheartIcon(farHeart);
             }
@@ -26,96 +28,112 @@ const ChefDetails = () => {
 
     const setFavourite = (id) => {
         addToFavourite(id);
+        setLoading(true);
     };
 
     useEffect(() => {
         const fav = getFavouriteList();
         const favArr = JSON.parse(fav);
         if (favArr.length > 0) {
-        setFavList(favArr);
+            setFavList(favArr);
+            setLoading(true);
         }
     }, []);
+
     return (
-        <div className="hero min-h-screen min-w-screen bg-base-200">
-            <div className="hero-content flex-col lg:flex-row">
-                <img
-                    src={chefData.chef_picture}
-                    className="max-w-sm rounded-lg shadow-2xl"
-                />
+        <div className="min-h-screen min-w-screen bg-base-200">
+            <div className="hero-content flex-col sm:flex-row">
+                <div className="avatar w-56">
+                    <img
+                        src={chefData.chef_picture}
+                        className="rounded-full  shadow-xl"
+                    />
+                </div>
                 <div className="overflow-x-auto">
                     <h1 className="text-5xl font-bold">{chefData.chef_name}</h1>
                     <p className="py-6">{chefData.chef_bio}</p>
                     <div className="card-actions my-4 justify-between">
                         <div className="badge badge-outline">
-                            Year of experience: {chefData.year_of_experience}
+                            <strong>Year of experience:</strong>
+                            {chefData.year_of_experience}
                         </div>
                         <div className="badge badge-outline">
-                            Number of recipes: {chefData.recipes.length}
+                            <strong>Number of recipes:</strong>
+                            {chefData.recipes.length}
                         </div>
                         <div className="badge badge-outline">
-                            Likes: {chefData.likes}
+                            <strong>Likes:</strong> {chefData.likes}
                         </div>
                     </div>
-                    <div className="overflow-x-auto">
-                        <table className="table table-compact w-full">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Recipe Name</th>
-                                    <th>Ingredients</th>
-                                    <th>Cooking Method</th>
-                                    <th>Rating</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row 1 */}
-                                {chefData.recipes.map((recipe, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <th>{index + 1}</th>
-                                            <td>{recipe.recipe_name}</td>
-                                            <td>
-                                                {recipe.ingredients.map(
-                                                    (ele,eleIndex) => {
-                                                        return (
-                                                            <span
-                                                                className="mr-2"
-                                                                key={eleIndex}
-                                                            >
-                                                                <div className="badge badge-outline">
-                                                                    {ele}
-                                                                </div>
-                                                            </span>
-                                                        );
-                                                    }
-                                                )}
-                                            </td>
-                                            <td>{recipe.cooking_method}</td>
-                                            <td>{recipe.rating}</td>
-                                            <td>
-                                                <FontAwesomeIcon
-                                                    onClick={() =>
-                                                        setLocalBookmark(
-                                                            recipe.recipe_id
-                                                        )
-                                                    }
-                                                    icon={
-                                                        favList.includes(
-                                                            recipe.recipe_id
-                                                        )
-                                                            ? fasHeart
-                                                            : heartIcon
-                                                    }
-                                                />
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+            </div>
+
+            <div className="text-center">
+                <h1 className="text-4xl font-bold">Recipe List</h1>
+            </div>
+            <div className="hero-content pb-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20">
+                <div className="grid gap-4 mb-8 md:grid-cols-2 lg:grid-cols-3">
+                    {chefData.recipes.map((recipe, index) => {
+                        return (
+                            <div
+                                className="card w-72 bg-base-100 shadow-xl"
+                                key={index}
+                            >
+                                <div className="card-body ">
+                                    <h3 className="card-title border-b-2 h-20 inline-block align-text-top">
+                                        {recipe.recipe_name}
+                                    </h3>
+                                    <p className="h-24">
+                                        <strong>Ingredients</strong>
+                                        <br />
+                                        {recipe.ingredients.map(
+                                            (ele, eleIndex) => {
+                                                return (
+                                                    <span
+                                                        className="mr-2"
+                                                        key={eleIndex}
+                                                    >
+                                                        <span className="badge badge-outline">
+                                                            {ele}
+                                                        </span>
+                                                    </span>
+                                                );
+                                            }
+                                        )}
+                                    </p>
+                                    <p className="m-0 leading-none">
+                                        <strong>COOKING METHOD: </strong>
+                                        {recipe.cooking_method}
+                                    </p>
+
+                                    <p className="m-0 leading-none flex justify-between">
+                                        <span>
+                                            <strong>Rating: </strong>
+                                            {recipe.rating}
+                                        </span>
+
+                                        <span className="border-2 p-2 hover:border-red-600 rounded-full cursor-pointer text-red-600">
+                                            <FontAwesomeIcon
+                                                className="font-red"
+                                                onClick={() =>
+                                                    setLocalBookmark(
+                                                        recipe.recipe_id
+                                                    )
+                                                }
+                                                icon={
+                                                    favList.includes(
+                                                        recipe.recipe_id
+                                                    )
+                                                        ? fasHeart
+                                                        : heartIcon
+                                                }
+                                            />
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

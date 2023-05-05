@@ -13,7 +13,7 @@ const Login = () => {
         // const form = event.target;
         // const email = form.email.value;
         // const password = form.password.value;
-        console.log(email, password);
+        // console.log(email, password);
         if ((email, password)) {
             signIn(email, password)
                 .then((result) => {
@@ -31,6 +31,7 @@ const Login = () => {
     };
 
     const handleGoogleLogin = () => {
+        event.preventDefault();
         googleSignIn()
             .then((result) => {
                 const loggedUser = result.user;
@@ -46,6 +47,7 @@ const Login = () => {
     };
 
     const handleGitHubLogin = () => {
+        event.preventDefault();
         githubSignIn()
             .then((result) => {
                 const loggedUser = result.user;
