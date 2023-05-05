@@ -39,36 +39,36 @@ const Header = () => {
                         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <ActiveLink
+                            <Link
                                 className="btn btn-ghost normal-case text-xl"
                                 to="/"
                             >
                                 Home
-                            </ActiveLink>
+                            </Link>
                         </li>
                         <li>
-                            <ActiveLink
+                            <Link
                                 className="btn btn-ghost normal-case text-xl"
                                 to="/chefs"
                             >
                                 Chef
-                            </ActiveLink>
+                            </Link>
                         </li>
                         <li>
-                            <ActiveLink
+                            <Link
                                 className="btn btn-ghost normal-case text-xl"
                                 to="/blog"
                             >
                                 Blog
-                            </ActiveLink>
+                            </Link>
                         </li>
                         <li>
-                            <ActiveLink
+                            <Link
                                 className="btn btn-ghost normal-case text-xl"
                                 to="/about"
                             >
                                 About us
-                            </ActiveLink>
+                            </Link>
                         </li>
                     </ul>
                 </div>
