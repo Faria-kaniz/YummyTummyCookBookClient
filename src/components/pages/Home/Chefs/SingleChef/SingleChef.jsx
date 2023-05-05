@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import LazyLoad from "react-lazy-load";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../../providers/AuthProviders';
 
 const SingleChef = ({chef}) => {
+    const { user } = useContext(AuthContext);
     return (
         <div className="bg-gray-100 p-6 rounded shadow-lg">
-            <img
-                className="object-cover w-full h-56 mb-6 rounded shadow-lg md:h-64 xl:h-80"
-                src={chef.chef_picture}
-                alt=""
-            />
+            <LazyLoad>
+                <img
+                    className="object-cover w-full h-56 mb-6 rounded shadow-lg md:h-64 xl:h-80"
+                    src={chef.chef_picture}
+                    alt=""
+                />
+            </LazyLoad>
             <p className="mb-2 text-xl font-bold leading-none sm:text-2xl">
                 {chef.chef_name}
             </p>
@@ -24,12 +29,14 @@ const SingleChef = ({chef}) => {
             <div className="card-actions my-4 justify-between">
                 <div className="badge badge-outline">Likes: {chef.likes}</div>
             </div>
-            <Link
-                className="btn btn-primary w-full"
-                to={`/chef/${chef.chef_id}`}
-            >
-                view recipes
-            </Link>
+            {user && (
+                <Link
+                    className="btn bg-gray-900 w-full"
+                    to={`/chef/${chef.chef_id}`}
+                >
+                    view recipes
+                </Link>
+            )}
         </div>
     );
 };

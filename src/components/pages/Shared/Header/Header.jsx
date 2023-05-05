@@ -72,10 +72,10 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
-                <a className="text-[#ddd] normal-case md:text-xl lg:hidden">
+                <a className="text-orange-400 font-bold normal-case md:text-xl lg:hidden">
                     YTCB
                 </a>
-                <a className="text-[#ddd] normal-case md:text-xl hidden lg:block">
+                <a className="normal-case md:text-xl hidden text-orange-400 font-bold lg:block">
                     Yummy Tummy Cook Book
                 </a>
             </div>

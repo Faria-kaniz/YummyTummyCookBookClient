@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: "Instrument Serif", serif;
+}
+.btn {
+    letter-spacing: 2px;
+}
+.relative h1 {
+    letter-spacing: 3px;
+}
+.badge {
+    text-transform: capitalize;
+}
+.navbar-start > .normal-case {
+    font-weight: 900;
+    letter-spacing: 2px;
+}
