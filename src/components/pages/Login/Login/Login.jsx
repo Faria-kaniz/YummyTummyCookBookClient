@@ -10,10 +10,6 @@ const Login = () => {
     const [error, setError] = useState([]);
     const handleLogin = (event) => {
         event.preventDefault();
-        // const form = event.target;
-        // const email = form.email.value;
-        // const password = form.password.value;
-        // console.log(email, password);
         if ((email, password)) {
             signIn(email, password)
                 .then((result) => {

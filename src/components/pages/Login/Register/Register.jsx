@@ -47,7 +47,7 @@ const Register = () => {
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
                 <div className="text-center">
-                    <h1 className="text-5xl font-bold">Please Register !</h1>
+                    <h1 className="text-5xl font-bold">Please Sign Up !!</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="mx-8 mt-4">
@@ -125,7 +125,7 @@ const Register = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-xs sm:btn-sm md:btn-md btn-primary">
-                                Register
+                                Sign Up
                             </button>
                         </div>
                     </form>
